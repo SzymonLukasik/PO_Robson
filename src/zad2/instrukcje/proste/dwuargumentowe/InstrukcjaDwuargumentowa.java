@@ -30,9 +30,6 @@ public abstract class InstrukcjaDwuargumentowa extends InstrukcjaProsta {
         argument2.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 
-    @Override
-    public void zadeklarujJakoFunkcje() {}
-
     protected abstract String znakOperacji();
 
     @Override

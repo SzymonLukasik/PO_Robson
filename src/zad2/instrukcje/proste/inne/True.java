@@ -1,6 +1,7 @@
-package zad2.instrukcje.proste;
+package zad2.instrukcje.proste.inne;
 
 import zad2.instrukcje.bledy.BladWykonania;
+import zad2.instrukcje.proste.InstrukcjaProsta;
 
 public class True extends InstrukcjaProsta {
 
@@ -12,5 +13,10 @@ public class True extends InstrukcjaProsta {
     @Override
     public String toString() {
         return "true";
+    }
+
+    @Override
+    public String voidToString() {
+        return program.boolDummyToString() + " = " + this;
     }
 }

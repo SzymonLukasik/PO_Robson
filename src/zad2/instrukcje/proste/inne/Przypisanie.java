@@ -1,9 +1,11 @@
-package zad2.instrukcje.zlozone;
+package zad2.instrukcje.proste.inne;
 
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
+import zad2.instrukcje.proste.InstrukcjaProsta;
+import zad2.instrukcje.zlozone.InstrukcjaZlozona;
 
-public class Przypisanie extends InstrukcjaZlozona{
+public class Przypisanie extends InstrukcjaProsta {
 
     private String nazwa;
     private Instrukcja wartosc;
@@ -14,9 +16,9 @@ public class Przypisanie extends InstrukcjaZlozona{
     }
 
     @Override
-    public void eksportujDoFunkcjiGdyKonieczne() {
-        this.zadeklarujJakoFunkcje();
-        wartosc.eksportujDoFunkcjiGdyKonieczne();
+    public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
+        wartosc.zadeklarujJakoFunkcje();
+        wartosc.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 
     @Override
@@ -27,5 +29,10 @@ public class Przypisanie extends InstrukcjaZlozona{
     @Override
     public String toString() {
         return nazwa + " = " + wartosc.wartoscToString();
+    }
+
+    @Override
+    public String voidToString() {
+        return this.toString();
     }
 }

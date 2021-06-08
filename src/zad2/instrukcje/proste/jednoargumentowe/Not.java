@@ -1,4 +1,4 @@
-package zad2.instrukcje.jednoargumentowe;
+package zad2.instrukcje.proste.jednoargumentowe;
 
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
@@ -13,5 +13,10 @@ public class Not extends InstrukcjaJednoargumentowa {
     @Override
     public double wykonaj() throws BladWykonania {
         return (! argument.wartoscLogiczna()) ? 1 : 0;
+    }
+
+    @Override
+    public String voidToString() {
+        return program.boolDummyToString() + " = " + this;
     }
 }

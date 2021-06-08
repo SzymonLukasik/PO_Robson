@@ -7,6 +7,14 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
     protected transient boolean czyFunkcja;
     protected transient int nrFunkcji;
 
+
+    protected String nazwaFunkcji() {
+        return "funkcja" + nrFunkcji + "()";
+    }
+
+    public abstract String deklaracjaFunkcji();
+
+    @Override
     public void zadeklarujJakoFunkcje() {
         nrFunkcji = program.dodajFunkcje(this);
     }
@@ -14,8 +22,13 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
     @Override
     public String wartoscToString() {
         if(czyFunkcja)
-            return "funkcja" + nrFunkcji + "()";
+            return nazwaFunkcji();
         else
             return this.toString();
+    }
+
+    @Override
+    public String voidToString() {
+        return toString();
     }
 }

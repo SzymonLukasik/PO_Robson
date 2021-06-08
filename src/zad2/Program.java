@@ -1,7 +1,7 @@
 package zad2;
 
 import zad2.instrukcje.zlozone.InstrukcjaZlozona;
-import zad2.instrukcje.proste.Zmienna;
+import zad2.instrukcje.proste.inne.Zmienna;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -33,5 +33,13 @@ public class Program {
     public int dodajFunkcje(InstrukcjaZlozona funkcja) {
         funkcje.add(funkcja);
         return funkcje.size() - 1;
+    }
+
+    public String boolDummyToString() {
+        return "bool_dummy";
+    }
+
+    public String doubleDummyToString() {
+        return "double_dummy";
     }
 }

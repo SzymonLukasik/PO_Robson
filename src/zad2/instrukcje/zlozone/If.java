@@ -18,32 +18,41 @@ public class If extends InstrukcjaZlozona {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("if ( " + )
+
+        s.append("( " + warunek.wartoscToString() + " )")
+         .append("? " + blok_prawda.toString() + "\n")
+         .append(": " + blok_falsz.toString() + "\n");
+
+        return s.toString();
     }
 
     @Override
-    public void eksportujDoFunkcjiGdyKonieczne() {
-        this.zadeklarujJakoFunkcje();
-        war
+    public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
+        warunek.zadeklarujJakoFunkcje();
+        warunek.deklarujPodrzedneWyrazeniaJakoFunkcje();
+
+        blok_prawda.zadeklarujJakoFunkcje();
+        blok_prawda.deklarujPodrzedneWyrazeniaJakoFunkcje();
+
+        blok_falsz.zadeklarujJakoFunkcje();
+        blok_falsz.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 
     @Override
     public double wykonaj() throws BladWykonania {
-        return 0;
+        if(warunek.wartoscLogiczna())
+            return blok_prawda.wykonaj();
+        else
+            return blok_falsz.wykonaj();
     }
 
     @Override
-    public String wartoscToString() {
-        return null;
-    }
+    public String deklaracjaFunkcji() {
+        StringBuilder s = new StringBuilder();
 
-    @Override
-    public void zadeklarujJakoFunkcje() {
+        s.append(this.nazwaFunkcji() + " {\n")
+                .append("\n return" + this + "\n");
 
-    }
-
-    @Override
-    public String nazwaFunkcji() {
-        return null;
+        return s.toString();
     }
 }

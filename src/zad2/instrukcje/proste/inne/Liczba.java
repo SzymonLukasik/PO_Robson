@@ -1,6 +1,7 @@
-package zad2.instrukcje.proste;
+package zad2.instrukcje.proste.inne;
 
 import zad2.instrukcje.bledy.BladWykonania;
+import zad2.instrukcje.proste.InstrukcjaProsta;
 
 public class Liczba extends InstrukcjaProsta {
 
@@ -11,6 +12,9 @@ public class Liczba extends InstrukcjaProsta {
     }
 
     @Override
+    public void deklarujPodrzedneWyrazeniaJakoFunkcje() {}
+
+    @Override
     public double wykonaj() throws BladWykonania {
         return wartosc;
     }
@@ -18,5 +22,10 @@ public class Liczba extends InstrukcjaProsta {
     @Override
     public String toString() {
         return "" + wartosc;
+    }
+
+    @Override
+    public String voidToString() {
+        return program.doubleDummyToString() + " = " + this;
     }
 }

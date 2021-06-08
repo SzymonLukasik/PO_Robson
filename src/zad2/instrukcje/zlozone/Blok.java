@@ -4,25 +4,38 @@ import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Blok extends InstrukcjaZlozona {
 
-    private ArrayList<Instrukcja> instrukcje;
+    private List<Instrukcja> instrukcje;
 
     public Blok(ArrayList<Instrukcja> instrukcje) {
         this.instrukcje = instrukcje;
     }
 
     @Override
-    public void eksportujDoFunkcjiGdyKonieczne() {
-        for(Instrukcja i : instrukcje) {
-            i.eksportujDoFunkcjiGdyKonieczne();
-        }
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        for(int i = 0; i < instrukcje.size() - 1; i++)
+            s.append(instrukcje.get(i).voidToString());
+
+        if(!instrukcje.isEmpty())
+            s.append("return \n")
+             .append(instrukcje.get(instrukcje.size() - 1).wartoscToString());
+
+        return s.toString();
     }
 
     @Override
-    public void eksportujJakoFunkcje() {
+    public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
+        if(!instrukcje.isEmpty())
+            instrukcje.get(instrukcje.size() - 1).zadeklarujJakoFunkcje();
 
+        for(Instrukcja i : instrukcje) {
+            i.deklarujPodrzedneWyrazeniaJakoFunkcje();
+        }
     }
 
     @Override
@@ -36,27 +49,13 @@ public class Blok extends InstrukcjaZlozona {
     }
 
     @Override
-    public String wartoscToString() {
-        return null;
-    }
-
-    @Override
-    public String toString() {
+    public String deklaracjaFunkcji() {
         StringBuilder s = new StringBuilder();
 
-        for(Instrukcja i : instrukcje)
-            s.append(i);
+        s.append(this.nazwaFunkcji() + " {\n")
+                .append(this.toString())
+                .append("\n return 0 \n}\n");
 
         return s.toString();
-    }
-
-    @Override
-    public void zadeklarujJakoFunkcje() {
-
-    }
-
-    @Override
-    public String nazwaFunkcji() {
-        return null;
     }
 }

@@ -1,5 +1,6 @@
 package zad2.instrukcje.proste.inne;
 
+import zad2.Program;
 import zad2.instrukcje.bledy.BladWykonania;
 import zad2.instrukcje.proste.InstrukcjaProsta;
 
@@ -9,6 +10,11 @@ public class Liczba extends InstrukcjaProsta {
 
     public Liczba(int wartosc) {
         this.wartosc = wartosc;
+    }
+
+    @Override
+    public void przydzielProgram(Program program) {
+        this.program = program;
     }
 
     @Override
@@ -26,6 +32,6 @@ public class Liczba extends InstrukcjaProsta {
 
     @Override
     public String voidToString() {
-        return program.doubleDummyToString() + " = " + this;
+        return program.doubleDummyToString() + " = " + this + ";";
     }
 }

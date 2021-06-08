@@ -8,7 +8,11 @@ public class Wieksze extends InstrukcjaDwuargumentowa {
 
     public Wieksze(Instrukcja argument1, Instrukcja argument2) {
         super(argument1, argument2);
-        this.znakOperacji = ">";
+    }
+
+    @Override
+    protected String znakOperacji() {
+        return ">";
     }
 
     @Override
@@ -18,6 +22,6 @@ public class Wieksze extends InstrukcjaDwuargumentowa {
 
     @Override
     public String voidToString() {
-        return program.boolDummyToString() + " = " + this;
+        return program.boolDummyToString() + " = " + this + ";";
     }
 }

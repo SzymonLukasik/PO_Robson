@@ -7,6 +7,10 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
     protected transient boolean czyFunkcja;
     protected transient int nrFunkcji;
 
+    public InstrukcjaZlozona() {
+        czyFunkcja = false;
+    }
+
 
     protected String nazwaFunkcji() {
         return "funkcja" + nrFunkcji + "()";
@@ -16,6 +20,7 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
 
     @Override
     public void zadeklarujJakoFunkcje() {
+        czyFunkcja = true;
         nrFunkcji = program.dodajFunkcje(this);
     }
 

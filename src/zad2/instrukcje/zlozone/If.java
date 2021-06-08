@@ -1,5 +1,6 @@
 package zad2.instrukcje.zlozone;
 
+import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 
@@ -10,9 +11,18 @@ public class If extends InstrukcjaZlozona {
     private Instrukcja blok_falsz;
 
     public If(Instrukcja warunek, Instrukcja blok_prawda, Instrukcja blok_falsz) {
+        super();
         this.warunek = warunek;
         this.blok_prawda = blok_prawda;
         this.blok_falsz = blok_falsz;
+    }
+
+    @Override
+    public void przydzielProgram(Program program) {
+        this.program = program;
+        warunek.przydzielProgram(program);
+        blok_prawda.przydzielProgram(program);
+        blok_falsz.przydzielProgram(program);
     }
 
     @Override
@@ -20,8 +30,8 @@ public class If extends InstrukcjaZlozona {
         StringBuilder s = new StringBuilder();
 
         s.append("( " + warunek.wartoscToString() + " )")
-         .append("? " + blok_prawda.toString() + "\n")
-         .append(": " + blok_falsz.toString() + "\n");
+         .append("? " + blok_prawda.wartoscToString())
+         .append(" : " + blok_falsz.wartoscToString());
 
         return s.toString();
     }
@@ -50,8 +60,8 @@ public class If extends InstrukcjaZlozona {
     public String deklaracjaFunkcji() {
         StringBuilder s = new StringBuilder();
 
-        s.append(this.nazwaFunkcji() + " {\n")
-                .append("\n return" + this + "\n");
+        s.append("private static double " + this.nazwaFunkcji() + " {\n")
+                .append("return " + this + ";\n}");
 
         return s.toString();
     }

@@ -18,7 +18,8 @@ public class Program {
     }
 
     public void dodajZmienna(Zmienna z) {
-        zmienne.put(z.nazwa(), 0.);
+        if(!zmienne.containsKey(z.nazwa()))
+            zmienne.put(z.nazwa(), 0.);
     }
 
     public double przypiszZmiennejWartosc(String nazwa, Double wartosc) {
@@ -41,5 +42,28 @@ public class Program {
 
     public String doubleDummyToString() {
         return "double_dummy";
+    }
+
+    public String zmienneToString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("private static boolean " + boolDummyToString() + " = false;\n")
+         .append("private static double " + doubleDummyToString() + " = 0;\n");
+
+        for(String zmienna : zmienne.keySet()) {
+            s.append("private static double " + zmienna + " = 0;\n");
+        }
+
+        return s.toString();
+    }
+
+    public String funkcjeToString() {
+        StringBuilder s = new StringBuilder();
+
+        for(int i = 0; i < funkcje.size(); i++) {
+            s.append(funkcje.get(i).deklaracjaFunkcji() + "\n" + ((i == funkcje.size() - 1) ? "" : "\n"));
+        }
+
+        return s.toString();
     }
 }

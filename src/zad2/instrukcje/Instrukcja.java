@@ -24,13 +24,11 @@ public abstract class Instrukcja {
 
     protected transient Program program;
 
-    public void przydzielProgram(Program program) {
-        this.program = program;
-    }
-
     public boolean wartoscLogiczna() {
         return this.wykonaj() == 1.;
     }
+
+    public abstract void przydzielProgram(Program program);
 
     public abstract void deklarujPodrzedneWyrazeniaJakoFunkcje();
 

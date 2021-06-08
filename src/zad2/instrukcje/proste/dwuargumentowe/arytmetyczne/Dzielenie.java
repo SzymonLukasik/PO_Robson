@@ -8,7 +8,11 @@ public class Dzielenie extends InstrukcjaDwuargumentowa {
 
     public Dzielenie(Instrukcja argument1, Instrukcja argument2) {
         super(argument1, argument2);
-        this.znakOperacji = "/";
+    }
+
+    @Override
+    protected String znakOperacji() {
+        return "/";
     }
 
     @Override
@@ -18,6 +22,6 @@ public class Dzielenie extends InstrukcjaDwuargumentowa {
 
     @Override
     public String voidToString() {
-        return program.doubleDummyToString() + " = " + this;
+        return program.doubleDummyToString() + " = " + this + ";";
     }
 }

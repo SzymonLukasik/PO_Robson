@@ -1,5 +1,6 @@
 package zad2.instrukcje.proste.jednoargumentowe;
 
+import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 
@@ -17,6 +18,6 @@ public class Not extends InstrukcjaJednoargumentowa {
 
     @Override
     public String voidToString() {
-        return program.boolDummyToString() + " = " + this;
+        return program.boolDummyToString() + " = " + this + ";";
     }
 }

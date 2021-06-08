@@ -1,5 +1,6 @@
 package zad2.instrukcje.zlozone;
 
+import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 
@@ -9,16 +10,24 @@ public class While extends InstrukcjaZlozona{
     private Instrukcja blok;
 
     public While(Instrukcja warunek, Instrukcja blok) {
+        super();
         this.warunek = warunek;
         this.blok = blok;
+    }
+
+    @Override
+    public void przydzielProgram(Program program) {
+        this.program = program;
+        warunek.przydzielProgram(program);
+        blok.przydzielProgram(program);
     }
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        s.append("while ( " + warunek.wartoscToString() + ") {\n")
-         .append(blok.toString() + "\n}\n");
+        s.append("while ( " + warunek.wartoscToString() + " ) {\n")
+         .append(blok.toString() + "\n}");
 
         return s.toString();
     }
@@ -27,6 +36,8 @@ public class While extends InstrukcjaZlozona{
     public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
         warunek.zadeklarujJakoFunkcje();
         warunek.deklarujPodrzedneWyrazeniaJakoFunkcje();
+
+        blok.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 
     @Override
@@ -41,9 +52,9 @@ public class While extends InstrukcjaZlozona{
     public String deklaracjaFunkcji() {
         StringBuilder s = new StringBuilder();
 
-        s.append(this.nazwaFunkcji() + " {\n")
-         .append(this.toString())
-         .append("\n return 0 \n}\n");
+        s.append("private static double " + this.nazwaFunkcji() + " {\n")
+         .append(this)
+         .append("\nreturn 0;\n}");
 
         return s.toString();
     }

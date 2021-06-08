@@ -21,7 +21,7 @@ public class Zmienna extends InstrukcjaProsta {
 
     @Override
     public void przydzielProgram(Program program) {
-        super.przydzielProgram(program);
+        this.program = program;
         program.dodajZmienna(this);
     }
 
@@ -37,6 +37,6 @@ public class Zmienna extends InstrukcjaProsta {
 
     @Override
     public String voidToString() {
-        return program.doubleDummyToString() + " = " + this;
+        return program.doubleDummyToString() + " = " + this + ";";
     }
 }

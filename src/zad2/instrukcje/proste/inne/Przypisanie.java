@@ -1,5 +1,6 @@
 package zad2.instrukcje.proste.inne;
 
+import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 import zad2.instrukcje.proste.InstrukcjaProsta;
@@ -13,6 +14,12 @@ public class Przypisanie extends InstrukcjaProsta {
     public Przypisanie(String nazwa, Instrukcja wartosc) {
         this.nazwa = nazwa;
         this.wartosc = wartosc;
+    }
+
+    @Override
+    public void przydzielProgram(Program program) {
+        this.program = program;
+        wartosc.przydzielProgram(program);
     }
 
     @Override
@@ -33,6 +40,6 @@ public class Przypisanie extends InstrukcjaProsta {
 
     @Override
     public String voidToString() {
-        return this.toString();
+        return this.toString() + ";";
     }
 }

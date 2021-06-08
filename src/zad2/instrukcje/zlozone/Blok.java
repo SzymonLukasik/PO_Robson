@@ -25,6 +25,8 @@ public class Blok extends InstrukcjaZlozona {
         if(!instrukcje.isEmpty())
             s.append("return \n")
                     .append(instrukcje.get(instrukcje.size() - 1).wartoscToString() + ";");
+        else
+            s.append("return 0;");
 
         return s.toString();
     }

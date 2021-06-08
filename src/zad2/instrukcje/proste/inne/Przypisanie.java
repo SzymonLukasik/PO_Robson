@@ -39,6 +39,11 @@ public class Przypisanie extends InstrukcjaProsta {
     }
 
     @Override
+    public String wartoscToString() {
+        return "( " + this + " )";
+    }
+
+    @Override
     public String voidToString() {
         return this.toString() + ";";
     }

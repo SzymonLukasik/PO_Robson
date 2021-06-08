@@ -20,7 +20,7 @@ public class Robson {
 
     public Robson() {
         this.instrukcja = null;
-        this.program = null;
+        this.program = new Program();
         this.adapter = Instrukcja.moshi().adapter(Instrukcja.class);
     }
 
@@ -39,7 +39,9 @@ public class Robson {
 
         try {
             instrukcja = adapter.fromJson(jsonString);
-            program = null;
+            program = new Program();
+            instrukcja.przydzielProgram(program);
+
         } catch (Exception e) {
             throw new NieprawidlowyProgram();
         }
@@ -47,12 +49,6 @@ public class Robson {
     }
 
     public double wykonaj() throws BladWykonania {
-
-        if(program == null) {
-            program = new Program();
-            instrukcja.przydzielProgram(program);
-        }
-
         return instrukcja.wykonaj();
     }
 
@@ -95,7 +91,8 @@ public class Robson {
         instrukcja.deklarujPodrzedneWyrazeniaJakoFunkcje();
         instrukcja.zadeklarujJakoFunkcje();
 
-        s.append("public class " + filename + " { \n\n")
+        s.append("package tests.outJava;\n\n") // UWAGA - USUNĄĆ??
+         .append("public class " + filename + " { \n\n")
          .append(program.zmienneToString() + "\n")
          .append(program.funkcjeToString() + "\n")
          .append("public static void main(String[] args) {\n")

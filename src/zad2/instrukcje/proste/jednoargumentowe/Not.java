@@ -8,7 +8,11 @@ public class Not extends InstrukcjaJednoargumentowa {
 
     public Not(Instrukcja argument) {
         super(argument);
-        this.znakOperacji = "!";
+    }
+
+    @Override
+    protected String znakOperacji() {
+        return "!";
     }
 
     @Override

@@ -27,7 +27,7 @@ public class While extends InstrukcjaZlozona{
         StringBuilder s = new StringBuilder();
 
         s.append("while ( " + warunek.wartoscToString() + " ) {\n")
-         .append(blok.toString() + "\n}");
+         .append(blok.voidToString() + "\n}");
 
         return s.toString();
     }

@@ -1,6 +1,6 @@
 package tests.outJava;
 
-public class Przyklad1 {
+public class Przyklad1 { 
 
 private static boolean bool_dummy = false;
 private static double double_dummy = 0;

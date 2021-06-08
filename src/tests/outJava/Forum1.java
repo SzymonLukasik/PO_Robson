@@ -1,38 +1,26 @@
 package tests.outJava;
 
-public class Przyklad2 { 
+public class Forum1 { 
 
 private static boolean bool_dummy = false;
 private static double double_dummy = 0;
 private static double index = 0;
 private static double numer = 0;
-private static double temp = 0;
-private static double x1 = 0;
-private static double x2 = 0;
 
 private static double funkcja0() {
-return 
-1;
+return 0;
 }
 
 private static double funkcja1() {
-x1 = 1;
-x2 = 1;
-index = 3;
-while ( ( index <= numer ) ) {
-temp = ( x1 + x2 );
-x1 = x2;
-x2 = temp;
-index = ( index + 1 );
+while ( ( index < numer ) ) {
+
 }
-return 
-x2;
+return 0;
 }
 
 private static double funkcja2() {
-numer = 10;
 return 
-( ( numer <= 2 ) )? funkcja0() : funkcja1();
+( funkcja0() + funkcja1() );
 }
 
 public static void main(String[] args) {

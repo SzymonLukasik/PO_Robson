@@ -6,12 +6,13 @@ import zad2.instrukcje.proste.InstrukcjaProsta;
 
 public abstract class InstrukcjaJednoargumentowa extends InstrukcjaProsta {
 
-    protected transient String znakOperacji;
     protected Instrukcja argument;
 
     public InstrukcjaJednoargumentowa(Instrukcja argument) {
         this.argument = argument;
     }
+
+    protected abstract String znakOperacji();
 
     @Override
     public void przydzielProgram(Program program) {
@@ -27,6 +28,6 @@ public abstract class InstrukcjaJednoargumentowa extends InstrukcjaProsta {
 
     @Override
     public String toString() {
-        return znakOperacji + " " + argument.wartoscToString();
+        return znakOperacji() + " " + argument.wartoscToString();
     }
 }

@@ -2,8 +2,6 @@ package zad2.instrukcje;
 
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory;
-import moshi_przyklad.EmptyNode;
-import moshi_przyklad.FullNode;
 
 import zad2.Program;
 import zad2.instrukcje.bledy.BladWykonania;
@@ -17,7 +15,7 @@ import zad2.instrukcje.proste.dwuargumentowe.porownania.*;
 import zad2.instrukcje.proste.inne.*;
 import zad2.instrukcje.proste.jednoargumentowe.Not;
 import zad2.instrukcje.zlozone.Blok;
-import zad2.instrukcje.zlozone.If;
+import zad2.instrukcje.proste.inne.If;
 import zad2.instrukcje.zlozone.While;
 
 public abstract class Instrukcja {

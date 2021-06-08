@@ -1,10 +1,12 @@
-package zad2.instrukcje.zlozone;
+package zad2.instrukcje.proste.inne;
 
 import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
+import zad2.instrukcje.proste.InstrukcjaProsta;
+import zad2.instrukcje.zlozone.InstrukcjaZlozona;
 
-public class If extends InstrukcjaZlozona {
+public class If extends InstrukcjaProsta {
 
     private Instrukcja warunek;
     private Instrukcja blok_prawda;
@@ -57,12 +59,8 @@ public class If extends InstrukcjaZlozona {
     }
 
     @Override
-    public String deklaracjaFunkcji() {
-        StringBuilder s = new StringBuilder();
-
-        s.append("private static double " + this.nazwaFunkcji() + " {\n")
-                .append("return " + this + ";\n}");
-
-        return s.toString();
+    public String voidToString() {
+        return program.doubleDummyToString() + " = " + this + ";";
     }
+
 }

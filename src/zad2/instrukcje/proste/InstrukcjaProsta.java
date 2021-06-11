@@ -5,9 +5,6 @@ import zad2.instrukcje.Instrukcja;
 public abstract class InstrukcjaProsta extends Instrukcja {
 
     @Override
-    public void deklarujPodrzedneWyrazeniaJakoFunkcje() {}
-
-    @Override
     public void zadeklarujJakoFunkcje() {}
 
     @Override

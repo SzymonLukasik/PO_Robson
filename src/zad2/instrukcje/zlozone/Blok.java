@@ -16,7 +16,7 @@ public class Blok extends InstrukcjaZlozona {
         this.instrukcje = instrukcje;
     }
 
-    private String toStringReturn() {
+    public String toString() {
         StringBuilder s = new StringBuilder();
 
         for(int i = 0; i < instrukcje.size() - 1; i++)
@@ -37,24 +37,6 @@ public class Blok extends InstrukcjaZlozona {
         for(Instrukcja i : instrukcje) {
             i.przydzielProgram(program);
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-
-        for(int i = 0; i < instrukcje.size(); i++)
-            s.append(instrukcje.get(i).voidToString() + (i == instrukcje.size() - 1 ? "" : "\n"));
-
-        return s.toString();
-    }
-
-    @Override
-    public String wartoscToString() {
-        if(czyFunkcja)
-            return nazwaFunkcji();
-        else
-            return toStringReturn();
     }
 
     @Override
@@ -82,8 +64,34 @@ public class Blok extends InstrukcjaZlozona {
         StringBuilder s = new StringBuilder();
 
         s.append("private static double " + this.nazwaFunkcji() + " {\n")
-         .append(this.toStringReturn() +"\n}");
+         .append(this +"\n}");
 
         return s.toString();
     }
+
+    @Override
+    public String voidToString() {
+        StringBuilder s = new StringBuilder();
+
+        for (int i = 0; i < instrukcje.size(); i++)
+            s.append(instrukcje.get(i).voidToString() + (i == instrukcje.size() - 1 ? "" : "\n"));
+
+        return s.toString();
+
+    }
+
+
+    public static Instrukcja getRandom(int glebokosc) {
+        if(glebokosc == 0)
+            return new Blok(new ArrayList<>());
+
+        int szerokosc = 5;
+
+        ArrayList<Instrukcja> instrukcje = new ArrayList<>();
+        for(int i = 0; i < szerokosc; i++) {
+            instrukcje.add(Instrukcja.dajLosowa(glebokosc - 1));
+        }
+
+        return new Blok(instrukcje);
+    };
 }

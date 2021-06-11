@@ -11,7 +11,6 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
         czyFunkcja = false;
     }
 
-
     protected String nazwaFunkcji() {
         return "funkcja" + nrFunkcji + "()";
     }
@@ -30,10 +29,5 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
             return nazwaFunkcji();
         else
             return this.toString();
-    }
-
-    @Override
-    public String voidToString() {
-        return toString();
     }
 }

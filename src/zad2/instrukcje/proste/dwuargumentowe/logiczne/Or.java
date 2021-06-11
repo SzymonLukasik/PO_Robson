@@ -2,9 +2,13 @@ package zad2.instrukcje.proste.dwuargumentowe.logiczne;
 
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
-import zad2.instrukcje.proste.dwuargumentowe.InstrukcjaDwuargumentowa;
+import zad2.instrukcje.proste.dwuargumentowe.Dwuargumentowa;
+import zad2.instrukcje.proste.dwuargumentowe.DwuargumentowaBoolean;
+import zad2.instrukcje.zlozone.Blok;
 
-public class Or extends InstrukcjaDwuargumentowa {
+import java.util.ArrayList;
+
+public class Or extends DwuargumentowaBoolean {
 
     public Or(Instrukcja argument1, Instrukcja argument2) {
         super(argument1, argument2);
@@ -24,4 +28,11 @@ public class Or extends InstrukcjaDwuargumentowa {
     public String voidToString() {
         return program.boolDummyToString() + " = " + this + ";";
     }
+
+    public static Instrukcja getRandom(int glebokosc) {
+        if(glebokosc == 0)
+            return new Blok(new ArrayList<>());
+
+        return new Or(Instrukcja.dajLosowa(glebokosc - 1), Instrukcja.dajLosowa(glebokosc - 1));
+    };
 }

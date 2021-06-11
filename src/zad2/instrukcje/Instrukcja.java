@@ -18,6 +18,8 @@ import zad2.instrukcje.zlozone.Blok;
 import zad2.instrukcje.proste.inne.If;
 import zad2.instrukcje.zlozone.While;
 
+import java.util.Random;
+
 public abstract class Instrukcja {
 
     protected transient Program program;
@@ -35,6 +37,10 @@ public abstract class Instrukcja {
     public abstract double wykonaj() throws BladWykonania;
 
     public abstract String wartoscToString();
+
+    public String wartoscLogicznaToString() {
+        return "(boolean) " + "( " + wartoscToString() + " )";
+    }
 
     public abstract String voidToString();
 
@@ -65,5 +71,33 @@ public abstract class Instrukcja {
 
                 )
                 .build();
+    }
+
+
+    public static Instrukcja dajLosowa(int glebokosc) {
+        Random random = new Random();
+        switch (random.nextInt(19)) {
+            case 0 -> { return Blok.getRandom(glebokosc); }
+            case 1 -> { return If.getRandom(glebokosc); }
+            case 2 -> { return While.getRandom(glebokosc); }
+            case 3 -> { return Przypisanie.getRandom(glebokosc); }
+            case 4 -> { return Plus.getRandom(glebokosc); }
+            case 5 -> { return Minus.getRandom(glebokosc); }
+            case 6 -> { return Razy.getRandom(glebokosc); }
+            // case 7 -> { return Dzielenie.getRandom(glebokosc); }
+            case 7 -> { return And.getRandom(glebokosc); }
+            case 8 -> { return Or.getRandom(glebokosc); }
+            case 9 -> { return Mniejsze.getRandom(glebokosc); }
+            case 10 -> { return Wieksze.getRandom(glebokosc); }
+            case 11 -> { return MniejszeRowne.getRandom(glebokosc); }
+            case 12 -> { return WiekszeRowne.getRandom(glebokosc); }
+            case 13 -> { return Rowne.getRandom(glebokosc); }
+            case 14 -> { return Not.getRandom(glebokosc); }
+            case 15 -> { return Liczba.getRandom(glebokosc); }
+            case 16 -> { return True.getRandom(glebokosc); }
+            case 17 -> { return False.getRandom(glebokosc); }
+            case 18 -> { return Zmienna.getRandom(glebokosc); }
+            default -> {return null; }
+        }
     }
 }

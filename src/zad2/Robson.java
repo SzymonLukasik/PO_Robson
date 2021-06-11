@@ -102,10 +102,27 @@ public class Robson {
         toFile(filename + java_ext, s.toString());
     }
 
-    public static void main(String[] args) {
+    private static String executeJava(File file) {
+        Scanner scanner = null;
+        try {
+            Process process = Runtime.getRuntime().exec("javac " + file.getPath());
+            process.waitFor();
+            process = Runtime.getRuntime().exec("java " + file.getPath());
+            process.waitFor();
+            scanner = new Scanner(process.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return scanner.nextLine();
+    }
+
+    private static void testujTests(String dirName) {
         Robson robson = new Robson();
 
-        File dir = new File("src/tests/inJSON");
+        String testDir = "src/" + dirName + "/";
+
+        File dir = new File(testDir + "inJSON");
 
         File[] inJSONs = dir.listFiles();
 
@@ -113,17 +130,20 @@ public class Robson {
 
             try {
                 robson.fromJSON(test.getPath());
+                System.out.println(test.getPath());
             } catch (NieprawidlowyProgram e) {
                 e.printStackTrace();
             }
 
+            double wykonaj;
             try {
-                System.out.println(robson.wykonaj());
+                wykonaj = robson.wykonaj();
+                System.out.println(wykonaj);
             } catch (BladWykonania e) {
                 e.printStackTrace();
             }
 
-            robson.toJSON("src/tests/outJSON/" + test.getName());
+            robson.toJSON(testDir + "outJSON/" + test.getName());
 
             String javaName = test.getName().substring(0, test.getName().length() - ".json".length());
             javaName = javaName.substring(0, 1).toUpperCase() + javaName.substring(1) + ".java";
@@ -131,7 +151,55 @@ public class Robson {
             robson.toJava(javaName);
 
             File fileJava = new File(javaName);
-            fileJava.renameTo(new File("src/tests/outJava/" + javaName));
+            fileJava.renameTo(new File(testDir + "outJava/" + javaName));
+            fileJava = new File(testDir + "outJava/" + javaName);
+
+            System.out.println(executeJava(fileJava));
         }
+    }
+
+    private static void testujRandom(int ile, int glebokosc) {
+        Robson robson = new Robson();
+
+        String testDir = "src/random_tests/";
+
+        File dir = new File(testDir + "inJSON");
+
+        File[] inJSONs = dir.listFiles();
+
+        for(int i = 0; i < ile; i++) {
+
+            File test = new File(testDir + "inJSON/" + "test" + i + ".json");
+
+            robson.instrukcja = Instrukcja.dajLosowa(glebokosc);
+            robson.instrukcja.przydzielProgram(robson.program);
+
+            robson.toJSON(testDir + "inJSON/" + test.getName());
+
+            double wykonaj;
+            try {
+                wykonaj = robson.wykonaj();
+                System.out.println(wykonaj);
+            } catch (BladWykonania e) {
+                e.printStackTrace();
+            }
+
+            String javaName = test.getName().substring(0, test.getName().length() - ".json".length());
+            javaName = javaName.substring(0, 1).toUpperCase() + javaName.substring(1) + ".java";
+
+            System.out.println(javaName);
+            robson.toJava(javaName);
+
+            File fileJava = new File(javaName);
+            fileJava.renameTo(new File(testDir + "outJava/" + javaName));
+            fileJava = new File(testDir + "outJava/" + javaName);
+
+            System.out.println(executeJava(fileJava));
+        }
+    }
+
+    public static void main(String[] args) {
+        testujTests("random_debug");
+        //testujRandom(3, 5);
     }
 }

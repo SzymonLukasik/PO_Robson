@@ -3,11 +3,11 @@ package zad2.instrukcje.zlozone;
 import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
-import zad2.instrukcje.proste.dwuargumentowe.arytmetyczne.Plus;
-import zad2.instrukcje.proste.dwuargumentowe.porownania.MniejszeRowne;
-import zad2.instrukcje.proste.inne.Liczba;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_double.arytmetyczne.Plus;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_boolean.porownania.MniejszeRowne;
+import zad2.instrukcje.proste.proste_double.Liczba;
 import zad2.instrukcje.proste.inne.Przypisanie;
-import zad2.instrukcje.proste.inne.Zmienna;
+import zad2.instrukcje.proste.proste_double.Zmienna;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,15 +34,16 @@ public class While extends InstrukcjaZlozona{
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        s.append("while ( " + warunek.wartoscToString() + " ) {\n")
-         .append(blok.voidToString() + "\n}");
+        s.append("while ( " + warunek.wartoscLogicznaToString() + " ) {\n")
+         .append(blok.voidToString() + "\n}")
+         .append("\nreturn 0;");
 
         return s.toString();
     }
 
     @Override
     public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
-        warunek.zadeklarujJakoFunkcje();
+        warunek.deklarujJakoFunkcje();
         warunek.deklarujPodrzedneWyrazeniaJakoFunkcje();
 
         blok.deklarujPodrzedneWyrazeniaJakoFunkcje();
@@ -57,19 +58,24 @@ public class While extends InstrukcjaZlozona{
     }
 
     @Override
-    public String deklaracjaFunkcji() {
+    public String deklaracjaFunkcjiToString() {
         StringBuilder s = new StringBuilder();
 
         s.append("private static double " + this.nazwaFunkcji() + " {\n")
          .append(this)
-         .append("\nreturn 0;\n}");
+         .append("\n}");
 
         return s.toString();
     }
 
     @Override
     public String voidToString() {
-        return toString();
+        StringBuilder s = new StringBuilder();
+
+        s.append("while ( " + warunek.wartoscLogicznaToString() + " ) {\n")
+         .append(blok.voidToString() + "\n}");
+
+        return s.toString();
     }
 
 
@@ -79,7 +85,7 @@ public class While extends InstrukcjaZlozona{
             return new Blok(new ArrayList<>());
 
         ArrayList<Instrukcja> instrukcje = new ArrayList<>();
-        String zmienna = "zmienna" + new Random().nextInt();
+        String zmienna = "zmienna" + new Random().nextInt(Integer.MAX_VALUE);
 
         instrukcje.add(new Zmienna(zmienna));
         instrukcje.add(new Przypisanie(zmienna, new Plus(new Zmienna(zmienna), new Liczba(1))));

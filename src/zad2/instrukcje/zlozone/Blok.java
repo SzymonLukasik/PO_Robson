@@ -23,8 +23,8 @@ public class Blok extends InstrukcjaZlozona {
             s.append(instrukcje.get(i).voidToString() + "\n");
 
         if(!instrukcje.isEmpty())
-            s.append("return \n")
-                    .append(instrukcje.get(instrukcje.size() - 1).wartoscToString() + ";");
+            s.append("return ")
+                    .append(instrukcje.get(instrukcje.size() - 1).wartoscLiczbowaToString() + ";");
         else
             s.append("return 0;");
 
@@ -42,7 +42,7 @@ public class Blok extends InstrukcjaZlozona {
     @Override
     public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
         if(!instrukcje.isEmpty())
-            instrukcje.get(instrukcje.size() - 1).zadeklarujJakoFunkcje();
+            instrukcje.get(instrukcje.size() - 1).deklarujJakoFunkcje();
 
         for(Instrukcja i : instrukcje) {
             i.deklarujPodrzedneWyrazeniaJakoFunkcje();
@@ -60,7 +60,7 @@ public class Blok extends InstrukcjaZlozona {
     }
 
     @Override
-    public String deklaracjaFunkcji() {
+    public String deklaracjaFunkcjiToString() {
         StringBuilder s = new StringBuilder();
 
         s.append("private static double " + this.nazwaFunkcji() + " {\n")
@@ -79,7 +79,6 @@ public class Blok extends InstrukcjaZlozona {
         return s.toString();
 
     }
-
 
     public static Instrukcja getRandom(int glebokosc) {
         if(glebokosc == 0)

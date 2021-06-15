@@ -1,7 +1,7 @@
 package zad2;
 
 import zad2.instrukcje.zlozone.InstrukcjaZlozona;
-import zad2.instrukcje.proste.inne.Zmienna;
+import zad2.instrukcje.proste.proste_double.Zmienna;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -20,6 +20,11 @@ public class Program {
     public void dodajZmienna(Zmienna z) {
         if(!zmienne.containsKey(z.nazwa()))
             zmienne.put(z.nazwa(), 0.);
+    }
+
+    public void dodajZmienna(String nazwa) {
+        if(!zmienne.containsKey(nazwa))
+            zmienne.put(nazwa, 0.);
     }
 
     public double przypiszZmiennejWartosc(String nazwa, Double wartosc) {
@@ -61,7 +66,7 @@ public class Program {
         StringBuilder s = new StringBuilder();
 
         for(int i = 0; i < funkcje.size(); i++) {
-            s.append(funkcje.get(i).deklaracjaFunkcji() + "\n" + ((i == funkcje.size() - 1) ? "" : "\n"));
+            s.append(funkcje.get(i).deklaracjaFunkcjiToString() + "\n" + ((i == funkcje.size() - 1) ? "" : "\n"));
         }
 
         return s.toString();

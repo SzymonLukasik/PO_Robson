@@ -23,10 +23,10 @@ public abstract class Dwuargumentowa extends InstrukcjaProsta {
 
     @Override
     public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
-        argument1.zadeklarujJakoFunkcje();
+        argument1.deklarujJakoFunkcje();
         argument1.deklarujPodrzedneWyrazeniaJakoFunkcje();
 
-        argument2.zadeklarujJakoFunkcje();
+        argument2.deklarujJakoFunkcje();
         argument2.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 

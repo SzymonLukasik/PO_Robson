@@ -4,9 +4,7 @@ import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 import zad2.instrukcje.proste.InstrukcjaProsta;
-import zad2.instrukcje.proste.jednoargumentowe.Not;
 import zad2.instrukcje.zlozone.Blok;
-import zad2.instrukcje.zlozone.InstrukcjaZlozona;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,11 +23,12 @@ public class Przypisanie extends InstrukcjaProsta {
     public void przydzielProgram(Program program) {
         this.program = program;
         wartosc.przydzielProgram(program);
+        program.dodajZmienna(nazwa);
     }
 
     @Override
     public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
-        wartosc.zadeklarujJakoFunkcje();
+        wartosc.deklarujJakoFunkcje();
         wartosc.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 
@@ -40,12 +39,17 @@ public class Przypisanie extends InstrukcjaProsta {
 
     @Override
     public String toString() {
-        return nazwa + " = " + wartosc.wartoscToString();
+        return nazwa + " = " + wartosc.wartoscLiczbowaToString();
     }
 
     @Override
-    public String wartoscToString() {
+    public String wartoscLiczbowaToString() {
         return "( " + this + " )";
+    }
+
+    @Override
+    public String wartoscLogicznaToString() {
+        return stringLiczbaNaLogiczna();
     }
 
     @Override
@@ -57,6 +61,6 @@ public class Przypisanie extends InstrukcjaProsta {
         if(glebokosc == 0)
             return new Blok(new ArrayList<>());
 
-        return new Przypisanie("zmienna" + new Random().nextInt(), Instrukcja.dajLosowa(glebokosc - 1));
+        return new Przypisanie("zmienna" + new Random().nextInt(5), Instrukcja.dajLosowa(glebokosc - 1));
     };
 }

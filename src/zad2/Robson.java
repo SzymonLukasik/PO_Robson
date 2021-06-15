@@ -1,15 +1,12 @@
 package zad2;
 
 import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
-import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory;
 
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 import zad2.instrukcje.bledy.NieprawidlowyProgram;
 
 import java.io.*;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Robson {
@@ -89,14 +86,15 @@ public class Robson {
         StringBuilder s = new StringBuilder();
 
         instrukcja.deklarujPodrzedneWyrazeniaJakoFunkcje();
-        instrukcja.zadeklarujJakoFunkcje();
+        instrukcja.deklarujJakoFunkcje();
 
-        s.append("package tests.outJava;\n\n") // UWAGA - USUNĄĆ??
-         .append("public class " + filename + " { \n\n")
+        //s.append("package tests.outJava;\n\n") // UWAGA - USUNĄĆ??
+        //s.append("package random_tests.outJava;\n\n") // UWAGA - USUNĄĆ??
+         s.append("public class " + filename + " { \n\n")
          .append(program.zmienneToString() + "\n")
          .append(program.funkcjeToString() + "\n")
          .append("public static void main(String[] args) {\n")
-         .append("System.out.println( "+ instrukcja.wartoscToString() + " );\n")
+         .append("System.out.println( "+ instrukcja.wartoscLiczbowaToString() + " );\n")
          .append("}\n}");
 
         toFile(filename + java_ext, s.toString());
@@ -138,7 +136,7 @@ public class Robson {
             double wykonaj;
             try {
                 wykonaj = robson.wykonaj();
-                System.out.println(wykonaj);
+                System.out.println("wynik wykonaj: " + wykonaj);
             } catch (BladWykonania e) {
                 e.printStackTrace();
             }
@@ -154,7 +152,7 @@ public class Robson {
             fileJava.renameTo(new File(testDir + "outJava/" + javaName));
             fileJava = new File(testDir + "outJava/" + javaName);
 
-            System.out.println(executeJava(fileJava));
+            System.out.println("wynik java: " + executeJava(fileJava));
         }
     }
 
@@ -176,30 +174,31 @@ public class Robson {
 
             robson.toJSON(testDir + "inJSON/" + test.getName());
 
-            double wykonaj;
-            try {
-                wykonaj = robson.wykonaj();
-                System.out.println(wykonaj);
-            } catch (BladWykonania e) {
-                e.printStackTrace();
-            }
-
             String javaName = test.getName().substring(0, test.getName().length() - ".json".length());
             javaName = javaName.substring(0, 1).toUpperCase() + javaName.substring(1) + ".java";
 
             System.out.println(javaName);
             robson.toJava(javaName);
 
+            double wykonaj;
+            try {
+                wykonaj = robson.wykonaj();
+                System.out.println("wynik wykonaj: " + ((int) wykonaj));
+            } catch (BladWykonania e) {
+                e.printStackTrace();
+            }
+
             File fileJava = new File(javaName);
             fileJava.renameTo(new File(testDir + "outJava/" + javaName));
             fileJava = new File(testDir + "outJava/" + javaName);
 
-            System.out.println(executeJava(fileJava));
+            System.out.println("wynik java: " + executeJava(fileJava));
         }
     }
 
     public static void main(String[] args) {
-        testujTests("random_debug");
-        //testujRandom(3, 5);
+        //testujTests("random_debug");
+        testujRandom(100, 5);
+        //testujTests("tests");
     }
 }

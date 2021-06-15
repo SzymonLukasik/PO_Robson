@@ -1,3 +1,5 @@
 .idea
-Zadanie2_Robson.iml
 out
+src/random_debug
+src/random_tests
+src/tests

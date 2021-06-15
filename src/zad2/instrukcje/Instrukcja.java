@@ -5,15 +5,19 @@ import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory;
 
 import zad2.Program;
 import zad2.instrukcje.bledy.BladWykonania;
-import zad2.instrukcje.proste.dwuargumentowe.arytmetyczne.Dzielenie;
-import zad2.instrukcje.proste.dwuargumentowe.arytmetyczne.Minus;
-import zad2.instrukcje.proste.dwuargumentowe.arytmetyczne.Plus;
-import zad2.instrukcje.proste.dwuargumentowe.arytmetyczne.Razy;
-import zad2.instrukcje.proste.dwuargumentowe.logiczne.And;
-import zad2.instrukcje.proste.dwuargumentowe.logiczne.Or;
-import zad2.instrukcje.proste.dwuargumentowe.porownania.*;
-import zad2.instrukcje.proste.inne.*;
-import zad2.instrukcje.proste.jednoargumentowe.Not;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_double.arytmetyczne.Dzielenie;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_double.arytmetyczne.Minus;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_double.arytmetyczne.Plus;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_double.arytmetyczne.Razy;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_boolean.logiczne.And;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_boolean.logiczne.Or;
+import zad2.instrukcje.proste.dwuargumentowe.dwuarg_boolean.porownania.*;
+import zad2.instrukcje.proste.jednoargumentowe.jednoarg_boolean.Not;
+import zad2.instrukcje.proste.proste_boolean.False;
+import zad2.instrukcje.proste.proste_boolean.True;
+import zad2.instrukcje.proste.proste_double.Liczba;
+import zad2.instrukcje.proste.inne.Przypisanie;
+import zad2.instrukcje.proste.proste_double.Zmienna;
 import zad2.instrukcje.zlozone.Blok;
 import zad2.instrukcje.proste.inne.If;
 import zad2.instrukcje.zlozone.While;
@@ -25,24 +29,44 @@ public abstract class Instrukcja {
     protected transient Program program;
 
     public boolean wartoscLogiczna() {
-        return this.wykonaj() == 1.;
+        return this.wykonaj() != 0.;
     }
 
     public abstract void przydzielProgram(Program program);
 
     public abstract void deklarujPodrzedneWyrazeniaJakoFunkcje();
 
-    public abstract void zadeklarujJakoFunkcje();
+    public abstract void deklarujJakoFunkcje();
 
     public abstract double wykonaj() throws BladWykonania;
 
-    public abstract String wartoscToString();
+    public abstract String wartoscLiczbowaToString();
 
-    public String wartoscLogicznaToString() {
-        return "(boolean) " + "( " + wartoscToString() + " )";
-    }
+    public abstract String wartoscLogicznaToString();
 
     public abstract String voidToString();
+
+    protected String stringLogicznaNaLiczbe() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("( " + wartoscLogicznaToString())
+                .append(" ? 1" )
+                .append(" : 0  )" );
+
+        return s.toString();
+    }
+
+    protected String stringLiczbaNaLogiczna() {
+        return "( " + wartoscLiczbowaToString() + " != 0 )";
+    }
+
+    protected String dummyLiczbaToString() {
+        return program.doubleDummyToString() + " = " + wartoscLiczbowaToString() + ";";
+    }
+
+    protected String dummyLogicznaToString() {
+        return program.boolDummyToString() + " = " + wartoscLogicznaToString() + ";";
+    }
 
     public static Moshi moshi() {
          return new Moshi.Builder()

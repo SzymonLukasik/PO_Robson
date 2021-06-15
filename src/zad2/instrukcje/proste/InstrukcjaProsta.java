@@ -5,10 +5,6 @@ import zad2.instrukcje.Instrukcja;
 public abstract class InstrukcjaProsta extends Instrukcja {
 
     @Override
-    public void zadeklarujJakoFunkcje() {}
+    public void deklarujJakoFunkcje() {}
 
-    @Override
-    public String wartoscToString() {
-        return toString();
-    }
 }

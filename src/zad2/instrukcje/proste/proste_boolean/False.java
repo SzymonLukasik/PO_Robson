@@ -1,0 +1,52 @@
+package zad2.instrukcje.proste.proste_boolean;
+
+import zad2.Program;
+import zad2.instrukcje.Instrukcja;
+import zad2.instrukcje.bledy.BladWykonania;
+import zad2.instrukcje.proste.InstrukcjaProsta;
+import zad2.instrukcje.zlozone.Blok;
+
+import java.util.ArrayList;
+
+public class False extends InstrukcjaProsta {
+
+    @Override
+    public void przydzielProgram(Program program) {
+        this.program = program;
+    }
+
+    @Override
+    public void deklarujPodrzedneWyrazeniaJakoFunkcje() {}
+
+    @Override
+    public double wykonaj() throws BladWykonania {
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "false";
+    }
+
+    @Override
+    public String wartoscLogicznaToString() {
+        return toString();
+    }
+
+    @Override
+    public String wartoscLiczbowaToString() {
+        return "0";
+    }
+
+    @Override
+    public String voidToString() {
+        return "";
+    }
+
+    public static Instrukcja getRandom(int glebokosc) {
+        if(glebokosc == 0)
+            return new Blok(new ArrayList<>());
+
+        return new False();
+    };
+}

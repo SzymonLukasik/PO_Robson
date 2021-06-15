@@ -15,16 +15,21 @@ public abstract class InstrukcjaZlozona extends Instrukcja {
         return "funkcja" + nrFunkcji + "()";
     }
 
-    public abstract String deklaracjaFunkcji();
+    public abstract String deklaracjaFunkcjiToString();
 
     @Override
-    public void zadeklarujJakoFunkcje() {
+    public String wartoscLogicznaToString() {
+        return stringLiczbaNaLogiczna();
+    }
+
+    @Override
+    public void deklarujJakoFunkcje() {
         czyFunkcja = true;
         nrFunkcji = program.dodajFunkcje(this);
     }
 
     @Override
-    public String wartoscToString() {
+    public String wartoscLiczbowaToString() {
         if(czyFunkcja)
             return nazwaFunkcji();
         else

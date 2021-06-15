@@ -4,9 +4,7 @@ import zad2.Program;
 import zad2.instrukcje.Instrukcja;
 import zad2.instrukcje.bledy.BladWykonania;
 import zad2.instrukcje.proste.InstrukcjaProsta;
-import zad2.instrukcje.proste.jednoargumentowe.Not;
 import zad2.instrukcje.zlozone.Blok;
-import zad2.instrukcje.zlozone.InstrukcjaZlozona;
 
 import java.util.ArrayList;
 
@@ -35,22 +33,22 @@ public class If extends InstrukcjaProsta {
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        s.append("( " + warunek.wartoscToString() + " )")
-         .append("? " + blok_prawda.wartoscToString())
-         .append(" : " + blok_falsz.wartoscToString());
+        s.append("( " + warunek.wartoscLogicznaToString())
+         .append(" ? " + blok_prawda.wartoscLiczbowaToString())
+         .append(" : " + blok_falsz.wartoscLiczbowaToString() + " )");
 
         return s.toString();
     }
 
     @Override
     public void deklarujPodrzedneWyrazeniaJakoFunkcje() {
-        warunek.zadeklarujJakoFunkcje();
+        warunek.deklarujJakoFunkcje();
         warunek.deklarujPodrzedneWyrazeniaJakoFunkcje();
 
-        blok_prawda.zadeklarujJakoFunkcje();
+        blok_prawda.deklarujJakoFunkcje();
         blok_prawda.deklarujPodrzedneWyrazeniaJakoFunkcje();
 
-        blok_falsz.zadeklarujJakoFunkcje();
+        blok_falsz.deklarujJakoFunkcje();
         blok_falsz.deklarujPodrzedneWyrazeniaJakoFunkcje();
     }
 
@@ -63,8 +61,24 @@ public class If extends InstrukcjaProsta {
     }
 
     @Override
+    public String wartoscLiczbowaToString() {
+        return toString();
+    }
+
+    @Override
+    public String wartoscLogicznaToString() {
+        return stringLiczbaNaLogiczna();
+    }
+
+    @Override
     public String voidToString() {
-        return program.doubleDummyToString() + " = " + this + ";";
+        StringBuilder s = new StringBuilder();
+
+        s.append("if ( " + warunek.wartoscLogicznaToString() + " ) {\n")
+                .append(blok_prawda.voidToString() + "\n} else {\n")
+                .append(blok_falsz.voidToString() + "\n}");
+
+        return s.toString();
     }
 
     public static Instrukcja getRandom(int glebokosc) {
